@@ -4,26 +4,6 @@
 HOST_NAME=$1
 HOST_IP=$2
 SSH_USER=$3
-IDENTITY_FILE_PATH=$4
-CONFIG_FILE_PATH=$5
-IS_BASTION=$6
-
-# Function to add or update a host configuration in the SSH config file
-add_or_update_host() {
-    local name=$1
-    local ip=$2
-    local user=$3
-    local key_path=$4
-    local cfg_path=$5
-    local is_bastion=$6
-
-    # Detect the operating system
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        SED_I_OPTION=(-i '')
-    else
-        SED_I_OPTION=(-i)
-    fi
-
     # Remove existing entry if it exists
     sed "${SED_I_OPTION[@]}" "/^Host ${name}\$/,/^$/d" "${cfg_path}"
 
